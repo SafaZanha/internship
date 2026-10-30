@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartMart - POS & Inventory System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">🛒 SmartMart <span class="subtitle">Hypermarket POS & Inventory</span></div>
+        <nav>
+            <button class="nav-btn active" onclick="switchTab('pos')">Billing / POS</button>
+            <button class="nav-btn" onclick="switchTab('inventory')">Inventory</button>
+            <button class="nav-btn" onclick="switchTab('sales')">Sales Reports</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- POS / BILLING TAB -->
+        <section id="pos-tab" class="tab-content active">
+            <div class="pos-container">
+                <div class="product-selection">
+                    <h3>Available Products</h3>
+                    <input type="text" id="search-product" placeholder="Search products..." onkeyup="filterProducts()">
+                    <div id="product-grid" class="product-grid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="billing-section">
+                    <h3>Current Bill / Cart</h3>
+                    <div class="cart-table-container">
+                        <table id="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-body">
+                                <!-- Cart items go here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bill-summary">
+                        <div class="summary-row"><span>Subtotal:</span> <span id="subtotal">₹0.00</span></div>
+                        <div class="summary-row"><span>Tax (5%):</span> <span id="tax">₹0.00</span></div>
+                        <div class="summary-row grand-total"><span>Grand Total:</span> <span id="grand-total">₹0.00</span></div>
+                        <button class="btn-checkout" onclick="checkout()">Complete Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INVENTORY TAB -->
+        <section id="inventory-tab" class="tab-content">
+            <div class="inventory-container">
+                <div class="form-card">
+                    <h3>Add New Product</h3>
+                    <form id="product-form" onsubmit="addProduct(event)">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" id="prod-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input type="text" id="prod-category" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₹)</label>
+                            <input type="number" id="prod-price" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock Quantity</label>
+                            <input type="number" id="prod-stock" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Product</button>
+                    </form>
+                </div>
+                <div class="table-card">
+                    <h3>Inventory Stock List</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SALES REPORTS TAB -->
+        <section id="sales-tab" class="tab-content">
+            <div class="sales-container">
+                <h3>Sales Transaction History</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Invoice ID</th>
+                            <th>Date & Time</th>
+                            <th>Items Count</th>
+                            <th>Total Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sales-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
